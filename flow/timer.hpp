@@ -4,7 +4,7 @@
 #include <chrono>
 #include <functional>
 
-namespace tb {
+namespace flow {
 
     template <typename Duration = std::chrono::seconds>
     class timer {
@@ -14,7 +14,9 @@ namespace tb {
 
         timer() : m_start(clock_t::now()) {}
 
-        // returns elapsed time (default in seconds)
+        /**
+         * @brief returns elapsed time (default in seconds)
+         */
         [[nodiscard]] double elapsed() const {
             using basic_dur = std::chrono::nanoseconds;
 
@@ -22,16 +24,22 @@ namespace tb {
             return basic_elapsed * basic_dur::period::num * dur::period::den / basic_dur::period::den / dur::period::num;
         }
 
-        // returns callable's execution time
+        /**
+         * @brief returns callable's execution time
+         * @param callable any object, that can be invoked with <b>args</b>
+         * @param args arguments to pass to <b>callable</b>
+         */
         template <typename Callable, typename... Args>
-        [[nodiscard]] static double duration(Callable&& callable, Args&&... args) {
-            tb::timer<dur> t;
+        static double duration(Callable&& callable, Args&&... args) {
+            flow::timer<dur> t;
             std::invoke(std::forward<Callable>(callable), std::forward<Args>(args)...);
             return t.elapsed();
         }
 
-        // resets the timer
-        void reset() {
+        /**
+         * @brief resets the timer
+         */
+        void reset() noexcept {
             m_start = clock_t::now();
         }
 

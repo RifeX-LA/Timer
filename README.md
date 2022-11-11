@@ -8,30 +8,30 @@ This is header-only timer to get code's execution time
 
     Use default duration (seconds)
     ```c++
-    tb::timer timer;
+    flow::timer timer;
     ```
 
     Specify the duration
     ```c++
-    tb::timer<std::chrono::milliseconds> timer;
+    flow::timer<std::chrono::milliseconds> timer;
     ```
    
 2. Get elapsed time
     ```c++
-    tb::timer timer;
+    flow::timer timer;
     // Your code here
     auto elapsed_time = timer.elapsed();
     ```
    or
     ```c++
-    auto elapsed_time = tb::timer<>::duration(
+    auto elapsed_time = flow::timer<>::duration(
     // Any callable object (for example function),
     // Callable object arguments...        
     );
     ```
 3. Reset the timer
     ```c++
-    tb::timer timer;
+    flow::timer timer;
     // Some work here
     timer.reset();
     ```
