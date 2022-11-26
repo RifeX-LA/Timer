@@ -1,5 +1,4 @@
-#ifndef TIMER_HPP
-#define TIMER_HPP
+#pragma once
 
 #include <chrono>
 #include <functional>
@@ -18,10 +17,7 @@ namespace flow {
          * @brief returns elapsed time (default in seconds)
          */
         [[nodiscard]] double elapsed() const {
-            using basic_dur = std::chrono::nanoseconds;
-
-            auto basic_elapsed = std::chrono::duration<double, basic_dur::period>(clock_t::now() - m_start).count();
-            return basic_elapsed * basic_dur::period::num * dur::period::den / basic_dur::period::den / dur::period::num;
+            return std::chrono::duration<double, typename dur::period>(clock_t::now() - m_start).count();
         }
 
         /**
@@ -48,5 +44,3 @@ namespace flow {
     };
 
 }
-
-#endif //TIMER_HPP
