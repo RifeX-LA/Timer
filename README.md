@@ -1,40 +1,59 @@
 # Overview
 
-This is header-only timer to get code's execution time
+This is header-only library that provide std::chrono based timer
 
-# Usage
+Features:
 
 1. Initialization
 
-    Use default duration (seconds)
+    Use default rep (double) and period (std::ratio<1>, which means seconds)
     ```c++
     flow::timer timer;
     ```
 
-    Specify the duration
+    Specify rep and period
     ```c++
-    flow::timer<std::chrono::milliseconds> timer;
+    flow::timer<int, std::milli> timer;
     ```
    
-2. Get elapsed time
+2. Get elapsed time of code fragment
     ```c++
     flow::timer timer;
-    // Your code here
+    // Some work here
     auto elapsed_time = timer.elapsed();
     ```
-   or
-    ```c++
+   
+3. Get elapsed time of any callable object
+   ```c++
     auto elapsed_time = flow::timer<>::duration(
-    // Any callable object (for example function),
-    // Callable object arguments...        
+        // Any callable object (like function or lambda),
+        // Callable object arguments...        
     );
     ```
-3. Reset the timer
+   
+4. Get elapsed time and return result of any callable object
+   ```c++
+   // unpack std::pair
+   auto [time, result] = flow::timer<>::duration_r(
+       // Any callable object (like function or lambda),
+       // Callable object arguments...
+   );
+   ```
+5. Reset the timer
     ```c++
     flow::timer timer;
     // Some work here
     timer.reset();
     ```
+   
+6. Get the moment, when the timer was started (or was reset)
+   ```c++
+   timer.started_in();
+   ```
+   
+# Usage
+
+Put the `flow` directory in your project. Nothing to build
 
 # Requirements
 

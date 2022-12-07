@@ -2,6 +2,10 @@
 #include <vector>
 #include <flow/timer.hpp>
 
+std::vector<int> create_vector(std::size_t size) {
+    return std::vector<int>(size);
+}
+
 void fill_vector(std::vector<int>& v) {
     std::generate(v.begin(), v.end(), rand);
 }
@@ -12,14 +16,17 @@ void sort_vector(std::vector<int>& v) {
 
 int main() {
     flow::timer timer;
-    std::vector<int> v(100'000'000);
-    std::cout << "Create vector time: " << timer.elapsed() << " sec\n";
+    std::vector<int> empty_vector;
+    std::cout << "Create empty vector time: " << timer.elapsed() << " sec\n";
+
+    auto [elapsed_time, vector] = flow::timer<>::duration_r(create_vector, 100'000'000);
+    std::cout << "Create vector with 100'000'000 elements time: " << elapsed_time << " sec\n";
 
     timer.reset();
-    fill_vector(v);
+    fill_vector(vector);
     std::cout << "Fill vector time: " << timer.elapsed() << " sec\n";
 
-    std::cout << "Sort vector time: " << flow::timer<std::chrono::milliseconds>::duration(sort_vector, v) << " ms";
+    std::cout << "Sort vector time: " << flow::timer<int, std::milli>::duration(sort_vector, vector) << " ms";
 
     return 0;
 }
