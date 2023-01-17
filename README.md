@@ -1,6 +1,6 @@
 # Overview
 
-This is header-only library that provide std::chrono based timer
+This is header-only library that provide std::chrono based timer. No external dependencies.
 
 Features:
 
@@ -16,44 +16,61 @@ Features:
     flow::timer<int, std::milli> timer;
     ```
    
-2. Get elapsed time of code fragment
+2. Get elapsed duration of code fragment
+   ```c++
+    flow::timer timer;
+    // Some work here
+    auto dur = timer.duration();
+    ```
+   
+3. Get elapsed duration and return result of any callable object
+   ```c++
+    // unpack std::pair
+   auto [elapsed, result] = flow::timer<>::duration_r(
+       // Any callable object (like function or lambda),
+       // Callable object arguments...
+   );
+    ```
+   
+4. Get elapsed time of code fragment
     ```c++
     flow::timer timer;
     // Some work here
     auto elapsed_time = timer.elapsed();
     ```
    
-3. Get elapsed time of any callable object
+5. Get elapsed time of any callable object
    ```c++
-    auto elapsed_time = flow::timer<>::duration(
-        // Any callable object (like function or lambda),
-        // Callable object arguments...        
-    );
+    // unpack std::pair
+   auto [elapsed, result] = flow::timer<>::elapsed_r(
+       // Any callable object (like function or lambda),
+       // Callable object arguments...
+   );
     ```
    
-4. Get elapsed time and return result of any callable object
+6. Get elapsed time and return result of any callable object
    ```c++
    // unpack std::pair
-   auto [time, result] = flow::timer<>::duration_r(
+   auto [elapsed, result] = flow::timer<>::elapsed_r(
        // Any callable object (like function or lambda),
        // Callable object arguments...
    );
    ```
-5. Reset the timer
+7. Reset the timer
     ```c++
     flow::timer timer;
     // Some work here
     timer.reset();
     ```
    
-6. Get the moment, when the timer was started (or was reset)
+8. Get the moment, when the timer was started (or was reset)
    ```c++
    timer.started_in();
    ```
    
 # Usage
 
-Put the `flow` directory in your project. Nothing to build
+Put the `flow` directory in your project and include `flow/timer.hpp`. Nothing to build.
 
 # Requirements
 
