@@ -84,6 +84,33 @@ namespace flow {
         }
 
         /**
+         * @brief executes <b>callable</b> <b>count</b> times and returns the average execution duration
+         * @param count count of iterations
+         * @param callable any object, that can be invoked with <b>args</b>
+         * @param args arguments to pass to <b>callable</b>
+         */
+        template <typename Callable, typename... Args>
+        static std::chrono::duration<rep, period> avg_duration(std::size_t count, Callable&& callable, Args&&... args) {
+            std::chrono::duration<rep, period> total;
+            for (std::size_t i = 0; i < count; ++i) {
+                total += duration(std::forward<Callable>(callable), std::forward<Args>(args)...);
+            }
+
+            return total / static_cast<rep>(count);
+        }
+
+        /**
+         * @brief executes <b>callable</b> <b>count</b> times and returns the average execution time
+         * @param count count of iterations
+         * @param callable any object, that can be invoked with <b>args</b>
+         * @param args arguments to pass to <b>callable</b>
+         */
+        template <typename Callable, typename... Args>
+        static rep avg(std::size_t count, Callable&& callable, Args&&... args) {
+            return avg_duration(count, std::forward<Callable>(callable), std::forward<Args>(args)...).count();
+        }
+
+        /**
          * @brief resets the timer
          */
         void reset() noexcept {

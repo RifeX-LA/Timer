@@ -56,14 +56,33 @@ Features:
        // Callable object arguments...
    );
    ```
-7. Reset the timer
+   
+7. Get average execution time
+   ```c++
+   auto avg = flow::timer<>::avg(
+       // count of iterations,
+       // callable object,
+       // args...        
+   );
+   ```
+
+8. Get average execution duration
+   ```c++
+   auto avg_dur = flow::timer<>::avg_duration(
+       // count of iterations,
+       // callable object,
+       // args...        
+   );
+   ```
+
+9. Reset the timer
     ```c++
     flow::timer timer;
     // Some work here
     timer.reset();
     ```
-   
-8. Get the moment, when the timer was started (or was reset)
+
+10. Get the moment, when the timer was started (or was reset)
    ```c++
    timer.started_in();
    ```
