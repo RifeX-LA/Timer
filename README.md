@@ -6,7 +6,7 @@ Features:
 
 1. Initialization
 
-    Use default rep (double) and period (std::ratio<1>, which means seconds)
+    Use default rep (_double_) and period (_std::ratio<1>_, which means seconds)
     ```c++
     flow::timer timer;
     ```
@@ -25,10 +25,10 @@ Features:
    
 3. Get elapsed duration and return result of any callable object
    ```c++
-    // unpack std::pair
+   // unpack std::pair
    auto [elapsed, result] = flow::timer<>::duration_r(
-       // Any callable object (like function or lambda),
-       // Callable object arguments...
+       // any callable object (like function or lambda),
+       // callable object arguments...
    );
     ```
    
@@ -41,10 +41,10 @@ Features:
    
 5. Get elapsed time of any callable object
    ```c++
-    // unpack std::pair
+   // unpack std::pair
    auto [elapsed, result] = flow::timer<>::elapsed_r(
-       // Any callable object (like function or lambda),
-       // Callable object arguments...
+       // any callable object (like function or lambda),
+       // callable object arguments...
    );
     ```
    
@@ -52,8 +52,8 @@ Features:
    ```c++
    // unpack std::pair
    auto [elapsed, result] = flow::timer<>::elapsed_r(
-       // Any callable object (like function or lambda),
-       // Callable object arguments...
+       // any callable object (like function or lambda),
+       // callable object arguments...
    );
    ```
    
@@ -61,8 +61,8 @@ Features:
    ```c++
    auto avg = flow::timer<>::avg(
        // count of iterations,
-       // callable object,
-       // args...        
+       // any callable object (like function or lambda),
+       // callable object arguments...        
    );
    ```
 
@@ -70,8 +70,8 @@ Features:
    ```c++
    auto avg_dur = flow::timer<>::avg_duration(
        // count of iterations,
-       // callable object,
-       // args...        
+       // any callable object (like function or lambda),
+       // callable object arguments...   
    );
    ```
 
